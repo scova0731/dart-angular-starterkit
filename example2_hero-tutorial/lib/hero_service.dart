@@ -62,6 +62,15 @@ class HeroService {
     }
   }
 
+  Future<Null> delete(int id) async {
+    try {
+      final url = '$_heroesUrl/$id';
+      await _http.delete(url, headers: _headers);
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
   dynamic _extractData(Response resp) => JSON.decode(resp.body)['data'];
 
   Exception _handleError(dynamic e) {
